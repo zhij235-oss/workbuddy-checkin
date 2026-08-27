@@ -2,8 +2,8 @@ name: workbuddy-checkin
 
 on:
   schedule:
-    # 北京时间 09:00 ≈ UTC 01:00
-    - cron: '0 1 * * *'
+    # 北京时间 07:36
+    - cron: '36 7 * * *'
   workflow_dispatch: {}
 
 permissions:
@@ -15,10 +15,10 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: '3.11'
 
