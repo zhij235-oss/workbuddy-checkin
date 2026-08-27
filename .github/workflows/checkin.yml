@@ -1,0 +1,32 @@
+name: workbuddy-checkin
+
+on:
+  schedule:
+    # 北京时间 09:00 ≈ UTC 01:00
+    - cron: '0 1 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  checkin:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run checkin
+        env:
+          WORKBUDDY_CHECKIN_URL: ${{ secrets.WORKBUDDY_CHECKIN_URL }}
+          WORKBUDDY_TOKEN: ${{ secrets.WORKBUDDY_TOKEN }}
+          SERVERCHAN_SCKEY: ${{ secrets.SERVERCHAN_SCKEY }}
+          BARK_URL: ${{ secrets.BARK_URL }}
+          NOTIFY_WEBHOOK: ${{ secrets.NOTIFY_WEBHOOK }}
+        run: python run_local.py
