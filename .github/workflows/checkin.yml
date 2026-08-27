@@ -1,14 +1,11 @@
 name: workbuddy-checkin
-
 on:
   schedule:
     # 北京时间 07:36
     - cron: '36 7 * * *'
   workflow_dispatch: {}
-
 permissions:
   contents: read
-
 jobs:
   checkin:
     runs-on: ubuntu-latest
@@ -16,16 +13,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
-
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
           python-version: '3.11'
-
       - name: Run checkin
         env:
-          WORKBUDDY_CHECKIN_URL: ${{ secrets.WORKBUDDY_CHECKIN_URL }}
-          WORKBUDDY_TOKEN: ${{ secrets.WORKBUDDY_TOKEN }}
+          WORKBUDDY_ACCESS_TOKEN: ${{ secrets.WORKBUDDY_ACCESS_TOKEN }}
+          WORKBUDDY_UID: ${{ secrets.WORKBUDDY_UID }}
+          WORKBUDDY_DOMAIN: ${{ secrets.WORKBUDDY_DOMAIN }}
+          WORKBUDDY_ACCOUNT_NAME: ${{ secrets.WORKBUDDY_ACCOUNT_NAME }}
           SERVERCHAN_SCKEY: ${{ secrets.SERVERCHAN_SCKEY }}
           BARK_URL: ${{ secrets.BARK_URL }}
           NOTIFY_WEBHOOK: ${{ secrets.NOTIFY_WEBHOOK }}
