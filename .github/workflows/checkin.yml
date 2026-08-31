@@ -1,8 +1,8 @@
 name: workbuddy-checkin
 on:
   schedule:
-    # 北京时间 07:36
-    - cron: '36 7 * * *'
+    # 北京时间 07:36 (UTC 23:36)
+    - cron: '36 23 * * *'
   workflow_dispatch: {}
 permissions:
   contents: read
